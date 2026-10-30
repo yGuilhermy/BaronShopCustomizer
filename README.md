@@ -1,79 +1,169 @@
-# Baron Shop Customizer
+<h1 align="center">Baron Shop Customizer</h1>
 
-Controle os filtros, o estoque e os preços da loja do Barão em Blade & Sorcery: Nomad.
+<p align="center">Escolha o estoque. Ajuste os preços. Personalize a loja do Barão em Blade &amp; Sorcery: Nomad.</p>
 
-**Versão:** 1.1.1 · **Tecnologia:** C# / .NET Standard 2.1 · **Licença:** [MIT](LICENSE)
+<p align="center">
+  <a href="https://github.com/yGuilhermy/BaronShopCustomizer/releases/tag/v1.1.1"><strong>Baixar v1.1.1</strong></a> ·
+  <a href="#instalar">Instalação</a> ·
+  <a href="#usar">Como usar</a> ·
+  <a href="#perguntas-frequentes">FAQ</a> ·
+  <a href="https://github.com/yGuilhermy/BaronShopCustomizer/issues">Reportar problema</a>
+</p>
 
-## Funcionalidades
+<p align="center">C# / .NET Standard 2.1 · Código aberto sob MIT · Pré-release</p>
 
-- Multiplicador de compra geral ou separado para armas, armaduras, roupas e consumíveis.
-- Multiplicador de venda de itens do jogador.
-- Filtros por categoria e por tier, incluindo opções de 0 a 6. A disponibilidade real depende do catálogo instalado.
-- Atualização manual da loja e opção de atualizar ao alterar configurações.
-- Interface pelo livro de opções do jogo, sem aplicativo externo.
+---
 
-## Uso no jogo
+Controle quais itens aparecem na loja e quanto você paga ou recebe por eles. Combine filtros de categoria e tier, aplique multiplicadores gerais ou individuais e solicite uma nova seleção de estoque pelo livro de opções do jogo.
 
-Entre na loja do Barão e abra **Mod Options → Baron Shop Customizer** no livro. Escolha os modos de preço e filtro e os multiplicadores desejados. Use **Atualizar Loja (Fast Refresh)** para repopular os suportes. Compras e vendas continuam sujeitas ao salvamento normal do jogo.
+> [!IMPORTANT]
+> Esta versão é uma **pré-release**, com alvo em Nomad 1.3.1 e validação no Quest ainda pendente. A disponibilidade dos itens depende do catálogo instalado.
 
-| Opção | Uso |
+## Instalar
+
+Para instalar o pacote pronto, você precisa de Blade & Sorcery: Nomad com suporte a mods de script compatíveis. Não é necessário ter .NET ou compilar o projeto no computador.
+
+### 1. Baixe o pacote
+
+| Arquivo | Finalidade |
 | --- | --- |
-| Modo de preço de compra | Geral ou individual por categoria |
-| Filtros de categoria / tier | Restringem o catálogo usado na reposição |
-| Multiplicador de venda | Ajusta o valor recebido pelos itens vendidos |
-| Fast Refresh | Solicita uma nova seleção dentro dos filtros |
+| [BaronShopCustomizer-v1.1.1.zip](https://github.com/yGuilhermy/BaronShopCustomizer/releases/download/v1.1.1/BaronShopCustomizer-v1.1.1.zip) | Mod pronto para instalação |
+| [BaronShopCustomizer-v1.1.1.zip.sha256](https://github.com/yGuilhermy/BaronShopCustomizer/releases/download/v1.1.1/BaronShopCustomizer-v1.1.1.zip.sha256) | Hash SHA-256 para conferir o download |
 
-## Compilar a partir do código
+### 2. Copie para o jogo
 
-Pré-requisitos: Windows com PowerShell, SDK .NET 8 ou superior e DLLs de referência compatíveis de ThunderRoad/Unity, obtidas de uma instalação ou SDK autorizado. O jogo não está incluído. Não use stubs para produzir um mod jogável.
+1. Feche o jogo e extraia o ZIP.
+2. Copie a pasta `BaronShopCustomizer` para a pasta `Mods` da instalação de Nomad.
+3. Confira a estrutura abaixo e reinicie o jogo.
 
-1. Clone somente este repositório.
-2. Coloque as referências em uma pasta externa ou em `sdk/` (ignorada pelo Git). Ela deve conter `ThunderRoad.dll`, `Newtonsoft.Json.dll`, `UnityEngine.dll` e os módulos `UnityEngine.*.dll` correspondentes.
-3. Na raiz do clone, execute:
+```text
+Mods/
+└── BaronShopCustomizer/
+    ├── BaronShopCustomizer.dll
+    ├── manifest.json
+    ├── LICENSE
+    ├── README.md
+    └── THIRD_PARTY.md
+```
+
+Ao atualizar, substitua a instalação anterior e evite duas cópias do mod. `manifest.json` e a DLL devem ficar diretamente dentro de `BaronShopCustomizer/`, sem outra pasta de mesmo nome no meio.
+
+## Usar
+
+1. Carregue seu personagem e viaje até a loja do Barão.
+2. Abra **Mod Options → Baron Shop Customizer** no livro.
+3. Escolha os modos de preço e filtro e ajuste os valores desejados.
+4. Use **Atualizar Loja (Fast Refresh)** para solicitar uma nova seleção de itens dentro dos filtros.
+
+### Configurações principais
+
+| Opção | O que controla |
+| --- | --- |
+| Modo de preço de compra | Um multiplicador geral ou valores separados por categoria |
+| Multiplicador de venda | Quanto você recebe ao vender itens |
+| Modo de filtro | Tier geral ou filtros individuais por categoria |
+| Filtros de armas | Tipo de arma e tier desejado |
+| Filtros de vestuário | Armaduras ou roupas e tier desejado |
+| Filtros de consumíveis | Poções, alimentos ou todos os consumíveis |
+| Auto-Restock ao Mudar Opção | Solicita reposição ao alterar configurações |
+| Atualizar Loja (Fast Refresh) | Solicita uma nova seleção com as regras atuais |
+
+### Exemplo: loja pela metade do preço
+
+Escolha o modo de preço **Geral** e o multiplicador `0.5x`. Para restringir o estoque a um nível, escolha o modo de filtro **Geral**, selecione o tier e use **Fast Refresh**.
+
+### Exemplo: selecionar apenas espadas
+
+Escolha o filtro **Individual por Categoria**, selecione **Espadas** em tipo de arma e escolha o tier. As opções de vestuário e consumíveis continuam com seus próprios filtros.
+
+## Recursos
+
+| Recurso | O que oferece |
+| --- | --- |
+| Preços de compra | Ajuste geral ou separado para armas, armaduras, roupas e consumíveis |
+| Valores de venda | Multiplicador para os itens vendidos ao Barão |
+| Seleção de armas | Espadas, adagas, machados, marretas, hastes, arcos, cajados e escudos |
+| Filtros de nível | Opções de tier 0 a 6, conforme o catálogo disponível |
+| Atualização de estoque | Reposição manual e opção de atualizar ao mudar configurações |
+| Menu dentro do jogo | Configuração pelo livro, sem aplicativo externo |
+
+## Perguntas frequentes
+
+### Escolher um tier cria itens que não existem no catálogo?
+
+Não. O filtro trabalha com os itens disponíveis na instalação. A presença de uma opção no menu não garante que todas as categorias tenham itens daquele tier.
+
+### Posso sortear outros itens sem mudar os filtros?
+
+Sim. Use **Fast Refresh** novamente para solicitar uma nova seleção dentro das regras atuais. O resultado pode repetir itens quando o conjunto disponível é pequeno.
+
+### As compras ficam no salvamento?
+
+Compras e vendas continuam sujeitas ao salvamento normal do jogo. Considere os multiplicadores escolhidos antes de concluir uma transação.
+
+### O mod não aparece no livro. O que conferir?
+
+Verifique se a DLL e o manifesto estão diretamente na pasta do mod, se não há uma instalação duplicada e se a versão do jogo é compatível. Reinicie o jogo após instalar ou atualizar.
+
+### Esta versão já foi testada no headset?
+
+Ainda não. O build Release e 7 verificações de seleção de estoque passaram, inclusive em uma cópia isolada dos arquivos públicos. Isso não substitui testes de execução Unity/IL2CPP e de comportamento no Quest. Veja o [relatório de validação](docs/AUDIT.md).
+
+## Desenvolvimento
+
+Os testes de seleção de estoque podem ser executados sem instalar o jogo. Para compilar a DLL completa, são necessárias referências externas compatíveis de ThunderRoad e Unity.
+
+<details>
+<summary><strong>Pré-requisitos, compilação e testes</strong></summary>
+
+### Pré-requisitos
+
+- Windows com PowerShell.
+- SDK .NET 8 ou superior.
+- Referências obtidas de uma instalação ou SDK autorizado: `ThunderRoad.dll`, `Newtonsoft.Json.dll`, `UnityEngine.dll` e os módulos `UnityEngine.*.dll` correspondentes.
+
+As bibliotecas do jogo não são distribuídas neste repositório. Stubs não substituem essas referências em um build jogável.
+
+### Compilar
 
 ```powershell
+git clone https://github.com/yGuilhermy/BaronShopCustomizer.git
+cd BaronShopCustomizer
 ./build.ps1 -SdkDir (Read-Host 'Pasta das DLLs de referencia')
 ```
 
-Também é possível definir `MOD_SDK_DIR` ou usar `./build.ps1` com as referências em `sdk/`. O caminho é resolvido em tempo de execução e não depende da máquina do autor.
+O script compila em Release, executa os testes e cria `dist/BaronShopCustomizer/`. Também aceita `MOD_SDK_DIR`; sem parâmetro ou variável, procura as referências em `sdk/`, relativa à raiz do projeto.
 
-Para executar os testes de lógica sem jogo ou referências proprietárias:
+### Testar a lógica
 
 ```powershell
 dotnet run --project tests/LogicTests.csproj -c Release
 ```
 
-O build cria `bin/`, `obj/` e `dist/` automaticamente. A saída instalável fica em `dist/BaronShopCustomizer/`. Copie somente essa pasta para a pasta `Mods` da instalação do jogo, usando o gerenciador de arquivos do dispositivo. Fontes, testes e bibliotecas de referência não precisam ser instalados no headset. Reinicie o jogo e evite duas cópias do mesmo mod.
+A suíte cobre coleção vazia, entradas nulas, ausência de item compatível, retorno circular e offsets negativos ou grandes.
 
-## Comandos de desenvolvimento
+### Limites do build verificado
 
-| Comando / parâmetro | Resultado |
+As referências PC utilizadas geram dois avisos MSB3277, relacionados a `System.Net.Http` e `System.IO.Compression`. O build conclui sem erros, mas a compatibilidade binária com Nomad precisa de validação no destino. O manifesto mantém `GameVersion` em `1.0.0.0`; esse campo não comprova compatibilidade com outras versões.
+
+</details>
+
+## Documentação
+
+| Documento | Conteúdo |
 | --- | --- |
-| `./build.ps1 -SdkDir <pasta>` | Compila Release, executa testes e gera o pacote |
-| `MOD_SDK_DIR` | Define a pasta de referências sem editar o projeto |
-| `dotnet run --project tests/LogicTests.csproj -c Release` | Executa os testes públicos de lógica |
+| [Notas do release](docs/RELEASE.md) | Pacote, instalação e limites da versão |
+| [Dependências](docs/THIRD_PARTY.md) | Referências externas e direitos de terceiros |
+| [Auditoria e validação](docs/AUDIT.md) | Preparação para publicação e verificações realizadas |
 
-## Privacidade
+O código não implementa telemetria, autenticação ou envio a serviços externos. As opções usam o sistema de mods do jogo.
 
-O código não implementa telemetria, autenticação ou envio de dados a serviços externos. As opções são expostas pelo sistema de mods do jogo. Binários, símbolos de depuração, referências proprietárias, logs, credenciais e arquivos locais estão excluídos do Git. Não há caminhos pessoais nos arquivos preparados para publicação.
+## Contribuir
 
-## Estrutura do repositório
+Para reportar um problema, [abra uma issue](https://github.com/yGuilhermy/BaronShopCustomizer/issues) com a versão do jogo, versão do mod, filtros e multiplicadores utilizados e passos para reproduzir. Se anexar logs, remova informações pessoais.
 
-| Pasta / arquivo | Finalidade |
-| --- | --- |
-| `src/` | Código C# do mod |
-| `tests/` | Testes públicos de lógica sem dependência do jogo |
-| `manifest.json` | Metadados lidos pelo jogo |
-| `BaronShopCustomizer.csproj` e `build.ps1` | Compilação e empacotamento independentes |
-| `docs/AUDIT.md` | Auditoria e limites da validação |
-| `docs/THIRD_PARTY.md` | Dependências e direitos de terceiros |
-
-## Validação e limites
-
-Build Release e 7 verificações de seleção de estoque: coleção vazia, entradas nulas, ausência de item compatível, retorno circular e offsets negativos/grandes.
-
-A compilação local usa referências reais da instalação PC disponível. Ela apresenta dois avisos MSB3277 de conflito entre versões de `System.Net.Http` e `System.IO.Compression` exigidas pelo SDK. Os avisos não foram ocultados. Não houve execução no Unity/IL2CPP, teste visual, medição de FPS ou teste no Quest nesta preparação. A compatibilidade com Nomad 1.3.1 é o alvo informado pelo projeto, ainda dependente de validação no dispositivo. O campo `GameVersion` do manifesto foi preservado em `1.0.0.0`; ele não representa uma confirmação de compatibilidade com todas as versões do jogo.
+Pull requests devem descrever a alteração e como ela foi validada. Para mudanças de lógica, execute a suíte; para comportamento da loja, informe se houve teste no headset.
 
 ## Licença
 
-Código sob [MIT](LICENSE), escolhida pela permissão simples de uso, modificação e redistribuição. Jogo, SDK e outros materiais de terceiros não são relicenciados; consulte [as notas de dependências](docs/THIRD_PARTY.md).
+Código sob [MIT](LICENSE). Jogo, SDK e outros materiais de terceiros mantêm suas próprias licenças.
